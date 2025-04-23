@@ -11,7 +11,7 @@ warnings.filterwarnings("ignore")
 
 
 
-rating = pd.read_csv('rating.csv')
+rating = pd.read_csv('ratings.csv')
 movies = pd.read_csv('movies.csv')
 
 #выравниваем данные
@@ -20,8 +20,8 @@ aligned_ratings_df = rating[rating['movieId'].isin(common_movie_ids)]
 aligned_movies_df = movies[movies['movieId'].isin(common_movie_ids)]
 
 #создаем матрицу предпочтений
-item_user_matrix_v2 = aligned_ratings_df.pivot(index='moveId',
-                                               columns='iserId',
+item_user_matrix_v2 = aligned_ratings_df.pivot(index='movieId',
+                                               columns='userId',
                                                values='rating').fillna(0)
 
 item_similarity_ratings = cosine_similarity(item_user_matrix_v2)
